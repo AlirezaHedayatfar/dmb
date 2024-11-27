@@ -1,0 +1,7 @@
+*
+!location.json
+!.github/
+!.github/**
+!src/
+!src/**
+!package.json
