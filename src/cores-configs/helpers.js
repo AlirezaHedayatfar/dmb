@@ -1,10 +1,10 @@
 import { resolveDNS, isDomain } from '../helpers/helpers';
 
-export async function getConfigAddresses(hostName, cleanIPs, enableIPv6) {
-    const resolved = await resolveDNS(hostName);
+export async function getConfigAddresses(cleanIPs, enableIPv6) {
+    const resolved = await resolveDNS(globalThis.hostName);
     const defaultIPv6 = enableIPv6 ? resolved.ipv6.map((ip) => `[${ip}]`) : []
     return [
-        hostName,
+        globalThis.hostName,
         'www.speedtest.net',
         ...resolved.ipv4,
         ...defaultIPv6,
@@ -31,7 +31,7 @@ export function generateRemark(index, port, address, cleanIPs, protocol, configT
         ? addressType = 'Clean IP'
         : addressType = isDomain(address) ? 'Domain': isIPv4(address) ? 'IPv4' : isIPv6(address) ? 'IPv6' : '';
 
-    return `💦 ${index} - ${protocol}${type} - ${addressType} : ${port}`;
+    return `🌖 ${index} - ${protocol}${type} - ${addressType} : ${port}`;
 }
 
 export function randomUpperCase (str) {
